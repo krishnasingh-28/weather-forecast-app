@@ -1,3 +1,4 @@
+from flask import Flask, request
 import requests
 import os
 import pandas as pd
@@ -5,8 +6,6 @@ import numpy as np
 from datetime import datetime, timedelta
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
-
-from django.http.response import HttpResponse, JsonResponse
 
 # Define API base URL
 base_url = "http://api.weatherapi.com"
@@ -76,22 +75,37 @@ def predict_temperature(location: str, date: str):
     return avg_temp
 
 
+### Flask Configuration
 
-def predict(request):
+app = Flask(__file__)
+
+
+# Predict Route
+@app.route("/api/predict")
+def predict():
     # Example usage
-    location = request.GET.get("location")
-    days = int(request.GET.get("days"))
+    location = request.args.get("location")
+    days = int(request.args.get("days"))
 
     if days > 7:
-        return JsonResponse({"detail": "Days greater than 7, we support prediction for only 7 or less than 7 days"},status=400)
+        return {"detail": "Days greater than 7, we support prediction for only 7 or less than 7 days"}
 
     result = []
     for i in range(1, days+1):
         date = (datetime.today() + timedelta(days=i)).strftime("%Y-%m-%d")
         response = predict_temperature(location, date)
         result.append(response)
-    return JsonResponse(result, safe=False)
-    
+    return result
 
-def ping_view(request):
-    return HttpResponse("Pong")
+
+# Ping Route
+@app.route("/api/ping")
+def ping_view():
+    return "Hello World"
+
+
+if __name__ == "__main__":
+    app.run(port=9001)
+
+
+## Test on your browser: http://127.0.0.1:9001/api/predict?location=chennai&days=2

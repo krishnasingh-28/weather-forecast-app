@@ -1,5 +1,7 @@
 from django.urls import path
-from weather.views import ping_view
+from weather import views
+
 urlpatterns = [
-    path("/ping", ping_view)
+    path("predict/", views.predict),
+    path("ping/", views.ping_view),
 ]
