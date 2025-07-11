@@ -1,5 +1,5 @@
 # weather-forecast-app
-App to forecast weather (with Gen-AI, ML integeration) 
+App to forecast weather with Gen-AI, ML integeration 
 
 
 ### Tech Stack:
