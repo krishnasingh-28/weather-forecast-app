@@ -3,8 +3,8 @@ App to forecast weather with Gen-AI, ML integeration
 
 
 ### Tech Stack:
-- **Frontend:** HTML, CSS, JS (Maybe react)
+- **Frontend:** HTML, CSS, JS 
 - **Backend:** Python, Django
-- **ML:** ML code on notebook/collab (scikit-learn)
+- **ML:** ML code on notebook (scikit-learn)
 - **Gen-AI Integration:** Huggingface (repo for llms), langchain(python library for llms), 
-- **DB:** Sqlite3, postgresql, mysql
+- **DB:** Sqlite3
